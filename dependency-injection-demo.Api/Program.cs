@@ -1,5 +1,12 @@
-var builder = WebApplication.CreateBuilder(args);
+using dependency_injection_demo.Api;
+using dependency_injection_demo.Api.Services;
 
+var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration;
+
+//Add custom dependencies
+builder.Services.AddTransient<IWeatherService,WeatherService>();
+builder.Services.Configure<FeaturesConfiguration>(config.GetSection("Features"));
 // Add services to the container.
 
 builder.Services.AddControllers();
